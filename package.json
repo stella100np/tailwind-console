@@ -1,6 +1,6 @@
 {
   "name": "tailwind-console",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "packageManager": "pnpm@7.1.1",
   "description": "console like tailwind",
   "author": "stella100np <2744636484@qq.com>",
