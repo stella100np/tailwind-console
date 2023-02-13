@@ -2,12 +2,36 @@
 
 console like tailwind
 
-## Install
+## Installation
+
+Install my-project with npm
 
 ```bash
 npm i tailwind-console
 ```
+    
+## Usage/Examples
 
-## License
+```javascript
+import { beautify } from "tailwind-console"
 
-MIT &copy; [stella100np](https://github.com/stella100np)
+console.log(beautify("text-azure-500", "foo"))
+
+console.log(beautify("text-azure-500")("foo"))
+
+//curried
+let azureText = beautify("text-azure-500")
+console.log(azureText("foo"))
+```
+
+
+## Features
+
+- typescript
+- tailwind style 
+- curry
+
+
+## Roadmap
+
+- Add style support,such as `Bold`, `Italic`

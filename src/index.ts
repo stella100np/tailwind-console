@@ -234,17 +234,27 @@ type TailwindNumber =
   | "900"
 export type TailTextColor = `text-${TaiwindColor}-${TailwindNumber}`
 
-export function beautify(textColor: TailTextColor, text: string) {
+export function beautify(textColor: TailTextColor): (text: string) => string;
+export function beautify(textColor: TailTextColor, text: string): string;
+
+export function beautify(textColor: TailTextColor, text?: string) {
   const styles = textColor.split("-")
-  if (styles && styles.length > 2) {
-    let color = styles[1] as TaiwindColor
-    let nb = styles[2] as TailwindNumber
-    if (Object.hasOwnProperty.call(colors, color)) {
-      let _colorMap = colors[color]
-      let _color = _colorMap[nb]
-      return `${hexToAnsi(_color)}${text}\x1b[0m`
-    }
-  } else {
-    return text
+  let color = styles[1] as TaiwindColor
+  let nb = styles[2] as TailwindNumber
+  let _color = ""
+  if (Object.hasOwnProperty.call(colors, color)) {
+    let _colorMap = colors[color]
+    _color = _colorMap[nb]
   }
+
+  if (text === undefined) {
+    return function (text: string) {
+      return `${hexToAnsi(_color)}${text}\x1b[0m`;
+    };
+  }
+  // 如果传入了两个参数，返回一个格式化后的字符串
+  else {
+    return `${hexToAnsi(_color)}${text}\x1b[0m`;
+  }
+
 }
